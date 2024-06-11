@@ -58,16 +58,17 @@
 					</execution>
 				</executions>
 				<configuration>
-					<packageName>com.example.consumingwebservice.wsdl</packageName>
+					<packageName>com.example.consumingwebservice.stubs</packageName>
 					<wsdlUrls>
-						<wsdlUrl>http://localhost:8080/ws/countries.wsdl</wsdlUrl>
-					</wsdlUrls>
-					<sourceDestDir>${sourcesDir}</sourceDestDir>
-					<destDir>${classesDir}</destDir>
-					<extension>true</extension>
-				</configuration>
-			</plugin>
-			<!-- end::wsdl[] -->
+						<!-- <wsdlUrl>http://localhost:9999/ws/countries.wsdl</wsdlUrl> -->
+			 <wsdlUrl>https://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc?singleWsdl</wsdlUrl>
+        </wsdlUrls>
+        <sourceDestDir>${sourcesDir}</sourceDestDir>
+        <destDir>${classesDir}</destDir>
+        <extension>true</extension>
+    </configuration>
+</plugin>
+<!-- end::wsdl[] -->
 		</plugins>
 	</build>
 

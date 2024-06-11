@@ -37,9 +37,10 @@ task wsimport {
 					destdir: jaxwsSourceDir,
 					extension: "true",
 					verbose: true,
-					wsdl: "http://localhost:8080/ws/countries.wsdl",
+					/*wsdl: "http://localhost:9999/ws/countries.wsdl",*/
+					wsdl: "https://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc?singleWsdl",
 					xnocompile: true,
-					package: "com.example.consumingwebservice.wsdl") {
+					package: "com.example.consumingwebservice.stubs") {
 				xjcarg(value: "-XautoNameResolution")
 			}
 		}
