@@ -63,6 +63,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 	implementation ('org.springframework.boot:spring-boot-starter-web-services') {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 	}
@@ -73,6 +75,8 @@ dependencies {
 			'com.sun.xml.ws:jaxws-rt:3.0.0'
 // end::dependency[]
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
