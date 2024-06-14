@@ -6,43 +6,44 @@ import com.example.consumingwebservice.stubs.GetPasswordResponse;
 import com.example.consumingwebservice.stubs.ObjectFactory;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.soap.MimeHeaders;
-import jakarta.xml.soap.SOAPException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ws.WebServiceMessage;
+import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
-import org.springframework.ws.soap.client.core.SoapActionCallback;
-import org.springframework.ws.soap.saaj.SaajSoapMessage;
 import org.springframework.ws.soap.saaj.SaajSoapMessageFactory;
-import org.springframework.ws.transport.TransportConstants;
 
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
+@Service
+public class BESClient extends WebServiceGatewaySupport {
 
-public class BESClient extends WebServiceGatewaySupport  {
-
+    Logger log = LoggerFactory.getLogger(BESClient.class);
     @Autowired
     private SaajSoapMessageFactory messageFactory;
 
     public GetPasswordResponse getPasswordResponse() throws Exception {
-        ObjectFactory factory = new ObjectFactory();
-        GetPassword requestPassword = factory.createGetPassword();
+        try {
+            ObjectFactory factory = new ObjectFactory();
+            GetPassword requestPassword = factory.createGetPassword();
 
-        JAXBElement<String> userId = factory.createString("abc");
-        JAXBElement<String> password = factory.createString("xyz");
-        JAXBElement<String> passKey = factory.createString("er34");
+            JAXBElement<String> userId = factory.createString("abc");
+            JAXBElement<String> password = factory.createString("xyz");
+            JAXBElement<String> passKey = factory.createString("er34");
 
-        requestPassword.setUserId(userId);
-        requestPassword.setPassword(password);
-        requestPassword.setPassKey(passKey);
+            requestPassword.setUserId(userId);
+            requestPassword.setPassword(password);
+            requestPassword.setPassKey(passKey);
 
-        MimeHeaders headers = messageFactory.createWebServiceMessage().getSaajMessage().getMimeHeaders();
-        headers.addHeader("Content-Type", "application/soap+xml;charset=utf-8");
-        getWebServiceTemplate().setMessageFactory(messageFactory);
+            MimeHeaders headers = messageFactory.createWebServiceMessage().getSaajMessage().getMimeHeaders();
+            headers.addHeader("Content-Type", "application/soap+xml;charset=utf-8");
+            getWebServiceTemplate().setMessageFactory(messageFactory);
 
-        GetPasswordResponse response = (GetPasswordResponse) getWebServiceTemplate()
-                .marshalSendAndReceive("https://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc/Secure", requestPassword);
-        return response;
+            return (GetPasswordResponse) getWebServiceTemplate()
+                    .marshalSendAndReceive("https://bsestarmfdemo.bseindia.com/MFOrderEntry/MFOrder.svc/Secure", requestPassword);
+        } catch (Exception ex) {
+            System.out.println("GetPassword Response Error: " + ex.getMessage());
+            log.error("GetPassword Response Error: " + ex.getLocalizedMessage());
+        }
+        return null;
     }
 }
 

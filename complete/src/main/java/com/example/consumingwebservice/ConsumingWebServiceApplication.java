@@ -4,7 +4,7 @@ package com.example.consumingwebservice;
 //import com.example.consumingwebservice.stubs.GetCountryResponse;
 
 import com.example.consumingwebservice.stubs.GetPasswordResponse;
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -32,11 +32,11 @@ public class ConsumingWebServiceApplication {
 		};
 	}*/
 
-	@Bean
+	/*@Bean
 	CommandLineRunner lookup(BESClient besClient) throws Exception {
 		GetPasswordResponse response = besClient.getPasswordResponse();
 		System.err.println(response.getGetPasswordResult());
         return null;
-    }
+    }*/
 
 }
