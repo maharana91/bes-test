@@ -63,12 +63,12 @@ public class CountryConfiguration extends WsConfigurerAdapter {
 	@Bean
 	public SaajSoapMessageFactory messageFactory() throws SOAPException {
 		SaajSoapMessageFactory messageFactory = new SaajSoapMessageFactory();
-		messageFactory.setSoapVersion(SoapVersion.SOAP_12);  //.SOAP_12
+		messageFactory.setSoapVersion(SoapVersion.SOAP_12);
 		//MimeHeaders headers =
 		//headers.setHeader(TransportConstants.HEADER_CONTENT_TYPE, "application/soap+xml;charset=utf-8");
 		messageFactory.setMessageFactory(MessageFactory.newInstance(SOAPConstants.SOAP_1_2_PROTOCOL));
-		messageFactory.createWebServiceMessage().getSaajMessage().getMimeHeaders()
-				.setHeader("Content-Type", "application/soap+xml;charset=utf-8");
+		MimeHeaders headers = messageFactory.createWebServiceMessage().getSaajMessage().getMimeHeaders();
+		headers.setHeader("Content-Type", "application/soap+xml;charset=utf-8");
 		messageFactory.afterPropertiesSet();
 		WebServiceTemplate webServiceTemplate = new BESClient().getWebServiceTemplate();
 		webServiceTemplate.setMessageFactory(messageFactory);

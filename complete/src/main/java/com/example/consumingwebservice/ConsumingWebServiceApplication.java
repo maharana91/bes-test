@@ -2,25 +2,19 @@
 package com.example.consumingwebservice;
 
 //import com.example.consumingwebservice.stubs.GetCountryResponse;
-import com.example.consumingwebservice.stubs.GetPassword;
+
 import com.example.consumingwebservice.stubs.GetPasswordResponse;
-import jakarta.xml.soap.MimeHeaders;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.ws.WebServiceMessage;
-import org.springframework.ws.soap.saaj.SaajSoapMessage;
-import org.springframework.ws.transport.TransportConstants;
-
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
 
 
 @SpringBootApplication
 public class ConsumingWebServiceApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("sun.security.ssl.allowUnsafeRenegotiation","true");
 		SpringApplication.run(ConsumingWebServiceApplication.class, args);
 	}
 
@@ -39,7 +33,7 @@ public class ConsumingWebServiceApplication {
 	}*/
 
 	@Bean
-	CommandLineRunner lookup(BESClient besClient) {
+	CommandLineRunner lookup(BESClient besClient) throws Exception {
 		GetPasswordResponse response = besClient.getPasswordResponse();
 		System.err.println(response.getGetPasswordResult());
         return null;
